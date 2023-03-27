@@ -1,12 +1,36 @@
 <template>
- <main>
-   <h1>Login</h1>
-   <form @submit.prevent="login">
-     <input type="text" placeholder="Username" v-model="username">
-     <input type="password" placeholder="Password" v-model="password">
-     <button type="submit">Submit</button>
-   </form>
- </main>
+ <v-container>
+   <v-row>
+     <v-col cols="12" md="4" offset-md="4" sm="6" oofset-sm="3" class="pa-4">
+       <v-card class="mx-auto">
+         <v-card-title class="text-center text-primary">Lyth</v-card-title>
+         <v-form @submit.prevent="login">
+           <v-card-text>
+             <v-text-field
+               v-model="username"
+               label="Identifiant"
+               prepend-icon="mdi-account-circle"
+               required
+             ></v-text-field>
+             <v-text-field
+               :type="showPassword ? 'text' : 'password'"
+               v-model="password"
+               label="Mot de passe"
+               prepend-icon="mdi-lock"
+               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+               @click:append="showPassword = !showPassword"
+               required
+             ></v-text-field>
+           </v-card-text>
+           <v-card-actions class="justify-space-between flex-wrap">
+             <v-btn color="secondary">Mot de passe oublié</v-btn>
+             <v-btn type="submit" color="primary" variant="outlined">Se connecter</v-btn>
+           </v-card-actions>
+         </v-form>
+       </v-card>
+     </v-col>
+   </v-row>
+ </v-container>
 </template>
 
 <script>
@@ -15,7 +39,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      showPassword: false,
     }
   },
   methods: {
